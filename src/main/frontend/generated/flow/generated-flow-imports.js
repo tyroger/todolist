@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import '@vaadin/polymer-legacy-adapter/style-modules.js';
 import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
 import '@vaadin/field-highlighter/src/vaadin-field-highlighter.js';
 import '@vaadin/common-frontend/ConnectionIndicator.js';
+=======
+import '@vaadin/field-highlighter/src/vaadin-field-highlighter.js';
+import '@vaadin/common-frontend/ConnectionIndicator.js';
+import '@vaadin/polymer-legacy-adapter/style-modules.js';
+>>>>>>> f94050ee057e0aafd39e2225cb554a4249171002
 import '@vaadin/accordion/src/vaadin-accordion.js';
 import '@vaadin/details/src/vaadin-details.js';
 import '@vaadin/accordion/src/vaadin-accordion-panel.js';
@@ -51,6 +57,10 @@ import '@vaadin/message-list/src/vaadin-message-list.js';
 import '@vaadin/notification/src/vaadin-notification.js';
 import '@vaadin/horizontal-layout/src/vaadin-horizontal-layout.js';
 import '@vaadin/scroller/src/vaadin-scroller.js';
+<<<<<<< HEAD
+=======
+import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
+>>>>>>> f94050ee057e0aafd39e2225cb554a4249171002
 import '@vaadin/popover/src/vaadin-popover.js';
 import 'Frontend/generated/jar-resources/vaadin-popover/popover.ts';
 import '@vaadin/progress-bar/src/vaadin-progress-bar.js';
