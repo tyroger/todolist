@@ -35,10 +35,7 @@ import './index';
 
 import './vaadin-react.js';
 import 'Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.js';
-<<<<<<< HEAD
 
 import './theme-my-theme.global.generated.js';
 import { applyTheme } from './theme.js';
 applyTheme(document);
-=======
->>>>>>> f94050ee057e0aafd39e2225cb554a4249171002
