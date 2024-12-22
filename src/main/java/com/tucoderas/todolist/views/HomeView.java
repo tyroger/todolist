@@ -19,6 +19,8 @@ public class HomeView extends VerticalLayout {
 
     private TaskListController taskListController;
 
+    private HorizontalLayout mainLayout = new HorizontalLayout();
+
     private VerticalLayout headerLayout = new VerticalLayout();
     private VerticalLayout editionLayout = new VerticalLayout();
     private VerticalLayout updatingLayout = new VerticalLayout();
@@ -28,7 +30,12 @@ public class HomeView extends VerticalLayout {
     public HomeView(TaskListController taskListController) {
         this.taskListController = taskListController;
         setPadding(isAttached());
-        add(headerLayout, editionLayout, updatingLayout, taskListLayout, footerLayout);
+        mainLayout.add(taskListLayout, updatingLayout);
+        mainLayout.setWidthFull();
+        mainLayout.setHeight("60vh");
+        add(headerLayout, editionLayout, mainLayout, footerLayout);
+        //supprimer l'ecart entre les composants
+        setSpacing(false);
         initializeLayouts();
 
     }
@@ -50,7 +57,10 @@ public class HomeView extends VerticalLayout {
     private void customEditionLayout() {
 
         TextField taskField = new TextField("Ajouter une nouvelle tache");
-        Button addTaskButton = new Button("Ajouter la tache");
+        //Button addTaskButton = new Button("Ajouter la tache");
+         Button addTaskButton = customButton("Ajouter une tache");
+        
+
 
         editionLayout.add(taskField, addTaskButton);
         editionLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -74,6 +84,7 @@ public class HomeView extends VerticalLayout {
 
     private void customTaskListLayout() {
         applyTaskListStyles();
+        taskListLayout.setPadding(isAttached());
         taskListLayout.removeAll();
         taskListLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
@@ -81,8 +92,8 @@ public class HomeView extends VerticalLayout {
         tasks.forEach(task -> {
             HorizontalLayout hLayout = new HorizontalLayout();
             Paragraph taskParagraph = new Paragraph(task.getTitle());
-            Button deleteButton = new Button("Supprimer");
-            Button updateButton = new Button("Mettre à jour");
+            Button deleteButton = customButton("Supprimer");
+            Button updateButton = customButton("Mettre à jour");
             hLayout.add(taskParagraph, deleteButton, updateButton);
             taskListLayout.add(hLayout);
 
@@ -100,7 +111,7 @@ public class HomeView extends VerticalLayout {
 
             updateButton.addClickListener(event -> {
                 TextField taskField = new TextField("Mettre à jour la tâche");
-                Button btnSubmitTask = new Button("Valider la mise à jour");
+                Button btnSubmitTask = customButton("Modifier");
                 updatingLayout.add(taskField, btnSubmitTask);
                 styleUpdateComponents(taskField, btnSubmitTask);
 
@@ -132,26 +143,21 @@ public class HomeView extends VerticalLayout {
     private void applyHeaderStyles() {
         headerLayout.getStyle().setBackgroundColor(CustomizedColors.BACKGROUND_COLOR);
         headerLayout.getStyle().set("color", "white");
-        headerLayout.getStyle().set("padding", "5px");
+        //headerLayout.getStyle().set("padding", "5px");
     }
 
     private void styleTaskInputComponents(TextField taskField, Button addTask) {
-        //editionLayout.getStyle().setBackgroundColor("yellow");
-        editionLayout.getStyle().set("border", "1px solidrgb(255, 251, 251)");
-        editionLayout.getStyle().set("border-radius", "5px");
-        editionLayout.getStyle().set("padding", "10px");
-        taskField.getStyle().set("margin-right", "10px");
+        editionLayout.getStyle().setBackgroundColor(CustomizedColors.BACKGROUND_SECONDARY_COLOR);
         taskField.setWidth("500px");
-        addTask.getStyle().set("background-color", "#4CAF50");
-        addTask.getStyle().set("color", "white");
+
         addTask.getStyle().set("border", "none");
         addTask.getStyle().set("border-radius", "5px");
-        addTask.getStyle().set("padding", "10px 24px");
+        addTask.getStyle().set("padding", "5px 24px");
     }
 
     private void styleUpdateComponents(TextField taskField, Button addTask) {
         //updatingLayout.getStyle().setBackgroundColor("blue");
-
+        updatingLayout.setWidth("30%");
         updatingLayout.getStyle().set("border", "1px solidrgb(255, 255, 255)");
         updatingLayout.getStyle().set("border-radius", "5px");
         updatingLayout.getStyle().set("padding", "10px");
@@ -165,13 +171,14 @@ public class HomeView extends VerticalLayout {
     }
 
     private void applyTaskListStyles() {
+        //taskListLayout.getStyle().setBackgroundColor("maroon");
         taskListLayout.getStyle().set("border", "1px solidrgb(255, 255, 255)");
         taskListLayout.getStyle().set("border-radius", "5px");
         taskListLayout.getStyle().set("padding", "10px");
         // rendre le scroll possible
         taskListLayout.getStyle().set("overflow-y", "auto");
-        taskListLayout.getStyle().set("height", "300px");
-
+        // pour la hauteur je veux qu'il prenne la place restante
+        taskListLayout.getStyle().set("flex-grow", "1");
 
     }
 
@@ -189,9 +196,21 @@ public class HomeView extends VerticalLayout {
         footerLayout.add(new Text(" | "));
         footerLayout.add(new Text("Contact us"));
 
-        footerLayout.getStyle().set("background-color", "#4CAF50");
+        footerLayout.getStyle().setBackgroundColor(CustomizedColors.BACKGROUND_COLOR);
         footerLayout.getStyle().set("color", "white");
         footerLayout.getStyle().set("padding", "10px");
+    }
+
+    Button customButton(String text) {
+        Button button = new Button(text);
+        button.getStyle().set("background-color", CustomizedColors.BUTTON_COLOR);
+        button.getStyle().set("color", CustomizedColors.BUTTON_TEXT_COLOR);
+        button.getStyle().set("border", "none");
+        button.getStyle().set("border-radius", "5px");
+        button.getStyle().set("padding", "5px 24px");
+        //definir une taille fixe
+        button.setWidth("180px");
+        return button;
     }
 
 }
