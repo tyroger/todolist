@@ -43,14 +43,14 @@ public class HomeView extends VerticalLayout {
 
     private void customHeaderLayout() {
         headerLayout.add(new H1("TodoListApp"));
-        headerLayout.add(new Paragraph("This is a simple todo list application."));
+        headerLayout.add(new Paragraph("Ceci est un site d'entrainement de coding."));
         applyHeaderStyles();
     }
 
     private void customEditionLayout() {
 
-        TextField taskField = new TextField("Edit a new task");
-        Button addTaskButton = new Button("Add Task");
+        TextField taskField = new TextField("Ajouter une nouvelle tache");
+        Button addTaskButton = new Button("Ajouter la tache");
 
         editionLayout.add(taskField, addTaskButton);
         editionLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -81,8 +81,8 @@ public class HomeView extends VerticalLayout {
         tasks.forEach(task -> {
             HorizontalLayout hLayout = new HorizontalLayout();
             Paragraph taskParagraph = new Paragraph(task.getTitle());
-            Button deleteButton = new Button("Delete");
-            Button updateButton = new Button("Update");
+            Button deleteButton = new Button("Supprimer");
+            Button updateButton = new Button("Mettre à jour");
             hLayout.add(taskParagraph, deleteButton, updateButton);
             taskListLayout.add(hLayout);
 
@@ -99,8 +99,8 @@ public class HomeView extends VerticalLayout {
             });
 
             updateButton.addClickListener(event -> {
-                TextField taskField = new TextField("update a task");
-                Button btnSubmitTask = new Button("Valid changes");
+                TextField taskField = new TextField("Mettre à jour la tâche");
+                Button btnSubmitTask = new Button("Valider la mise à jour");
                 updatingLayout.add(taskField, btnSubmitTask);
                 styleUpdateComponents(taskField, btnSubmitTask);
 
@@ -182,6 +182,13 @@ public class HomeView extends VerticalLayout {
         footerLayout.getStyle().set("width", "100%");
 
         footerLayout.add(new Text("© 2024 Tucoderas"));
+        //ajouter un separator
+        footerLayout.add(new Text(" | "));
+        footerLayout.add(new Text("Project Github Link"));
+        // ajouter un lien vers le github
+        footerLayout.add(new Text(" | "));
+        footerLayout.add(new Text("Contact us"));
+
         footerLayout.getStyle().set("background-color", "#4CAF50");
         footerLayout.getStyle().set("color", "white");
         footerLayout.getStyle().set("padding", "10px");
