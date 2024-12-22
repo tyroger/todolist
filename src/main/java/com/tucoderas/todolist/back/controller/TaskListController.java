@@ -1,18 +1,14 @@
 package com.tucoderas.todolist.back.controller;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tucoderas.todolist.back.entity.TaskEntity;
 import com.tucoderas.todolist.back.service.TaskListService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api")
 public class TaskListController {
 
     TaskListService taskListService;
@@ -21,14 +17,20 @@ public class TaskListController {
         this.taskListService = taskListService;
     }
 
-    @GetMapping()
-    public List<String> getTasks() {
+    public List<TaskEntity> getTasks() {
         return taskListService.getTasks();
     }
 
-    @PostMapping()
-    public void addTask(@RequestBody String task) {
+    public void addTask(@RequestBody TaskEntity task) {
         taskListService.addTask(task);
+    }
+
+    public void deleteTask(@RequestBody TaskEntity task) {
+        taskListService.deleteTask(task);
+    }
+
+    public void updateTask(@RequestBody TaskEntity task) {
+        taskListService.updateTask(task);
     }
 
 }

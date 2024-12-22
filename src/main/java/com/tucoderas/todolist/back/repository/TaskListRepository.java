@@ -5,17 +5,28 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.tucoderas.todolist.back.entity.TaskEntity;
+
 @Repository
 public class TaskListRepository {
 
-    List<String>tasks = new ArrayList<>();
+    List<TaskEntity>tasks = new ArrayList<>();
 
-    public void addTask(String task) {
+    public void addTask(TaskEntity task) {
         tasks.add(task);
     }
 
-    public List<String> getTasks() {
+    public List<TaskEntity> getTasks() {
         return tasks;
+    }
+
+    public void deleteTask(Long id) {
+        tasks.removeIf(task -> task.getId().equals(id));
+    }
+
+    public void updateTask(TaskEntity task) {
+        tasks.removeIf(t -> t.getId().equals(task.getId()));
+        tasks.add(task);
     }
 
 }
